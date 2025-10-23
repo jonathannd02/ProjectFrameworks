@@ -1,6 +1,6 @@
-import { OneToMany, JoinColumn, Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm"
+import {   ManyToMany, Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinTable } from "typeorm"
 import { User } from "./User"
-
+import { Song} from "./Song"
 @Entity()
 export class Playlist {
 
@@ -20,6 +20,9 @@ export class Playlist {
     @ManyToOne(() => User, (user) => user.playlists)
     user: User
 
+    @ManyToMany(() => Song)
+    @JoinTable()
+    songs: Song[]
 
 
 }
