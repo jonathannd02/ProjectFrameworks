@@ -1,4 +1,7 @@
-import { OneToOne, JoinColumn, Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import {OneToOne, JoinColumn, Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm"
+import { Playlist } from './Playlist'
+import { Profile } from "./Profile"
+
 
 @Entity()
 export class User {
@@ -22,6 +25,9 @@ export class User {
     @OneToOne(() => Profile)
     @JoinColumn()
     profile: Profile
+
+    @OneToMany(()=>Playlist , (playlist)=>playlist.user)
+    playlists:Playlist[]
 
 
 }
