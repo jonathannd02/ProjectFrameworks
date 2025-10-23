@@ -1,27 +1,25 @@
 import { OneToOne, JoinColumn, Entity, PrimaryGeneratedColumn, Column } from "typeorm"
 
+
 @Entity()
-export class User {
+export class Profile {
 
     @PrimaryGeneratedColumn()
     id: number
 
     @Column()
-    firstName: string
+    age: number
 
     @Column()
-    lastName: string
+    username: string
 
     @Column()
-    birthDate: string
+    password: string
 
+    @Column()
+    photo: string
 
     @Column()
     email: string
-
-    @OneToOne(() => Profile)
-    @JoinColumn()
-    profile: Profile
-
 
 }
