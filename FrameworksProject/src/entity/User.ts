@@ -16,7 +16,19 @@ export class User {
     lastName: string
 
     @Column()
-    birthDate: string
+    birthDate: Date
+
+    public get age(): number {
+
+        const today = new Date();
+        let age = today.getUTCFullYear() - this.birthDate.getUTCFullYear();
+        const m = today.getMonth() - this.birthDate.getUTCMonth();
+        if ( m < 0 || (m===0 && today.getUTCDay() < this.birthDate.getUTCDay())){
+            age--;
+        }
+        return age;
+
+    }
 
 
     @Column()
