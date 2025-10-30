@@ -1,9 +1,15 @@
 import { AppDataSource } from "./data-source"
 import { Profile } from './entity/Profile'
 import { User } from "./entity/User"
+import express = require('express');
+
+
+const PORT = 3000;
 
 AppDataSource.initialize().then(async () => {
 
+    const app = express();
+    app.use(express.json());
     console.log("Inserting a new user into the database...")
     const user = new User()
     user.firstName = "Timber"
@@ -27,5 +33,17 @@ AppDataSource.initialize().then(async () => {
 
     const profiles  = await AppDataSource.manager.find(Profile);
     console.log("Loaded profiles: ", profiles);
+
+
+    app.get("/" , (_req ,res) =>{
+        res.send("Hello from root");
+    });
+
+    app.listen(PORT, () => console.log(`server started at ${PORT}`));
+
+
+
+
+
 
 }).catch(error => console.log(error))
